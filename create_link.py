@@ -93,11 +93,11 @@ def send(cipher_json,passphrase,args):
 
     print('')
     print('Delete paste  : %s/?pasteid=%s&deletetoken=%s' % (paste_url, paste_id, paste_deletetoken))
-    print('Paste         : %s/?%s#%s' % (paste_url, paste_id, passphrase))
+    print('Paste         : %s/?%s#%s' % (paste_url, paste_id, passphrase.decode('utf-8')))
 
 def main(args):
     key = bytes(os.urandom(32))
-    passphrase = b64encode(key).decode()
+    passphrase = b64encode(key)
     plaintext = args.text.encode('utf-8')
 
     #print("Main-Passphrase:\t{}".format(passphrase))
@@ -120,3 +120,4 @@ if __name__ == '__main__':
     parser.add_argument(dest='text',help="Text to send")
     arguments = parser.parse_args()
     sys.exit(main(arguments))
+    
